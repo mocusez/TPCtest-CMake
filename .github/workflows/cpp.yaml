@@ -1,0 +1,32 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ master,develop ]
+  pull_request:
+    branches: [ master,develop ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: sudo apt-get install -y g++-11
+
+    - name: Configure Compiler
+      run: |
+        echo "CC=/usr/bin/gcc-11" >> $GITHUB_ENV
+        echo "CXX=/usr/bin/g++-11" >> $GITHUB_ENV
+
+    - name: Create Build Directory
+      run: mkdir build
+
+    - name: Configure CMake
+      run: cmake -B build
+
+    - name: Build
+      run: cmake --build build
