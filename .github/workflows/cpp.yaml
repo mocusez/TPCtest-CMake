@@ -2,9 +2,9 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ master,develop ]
+    branches: [ "*" ]
   pull_request:
-    branches: [ master,develop ]
+    branches: [ "*" ]
 
 jobs:
   build:
@@ -30,3 +30,10 @@ jobs:
 
     - name: Build
       run: cmake --build build
+
+    - name: Test
+      run: |
+        cp -r data/ build/
+        ctest --test-dir build --verbose
+        rm -rf build/data/
+    
