@@ -36,4 +36,18 @@ jobs:
         cp -r data/ build/
         ctest --test-dir build --verbose
         rm -rf build/data/
+
+  JIT-Run:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: sudo apt-get install -y clang llvm python3
+
+    - name: Compile ByteCode
+      run: python3 jit/compile_bc.py
+
+    - name: Run
+      run: python3 jit/run_bc.py
     

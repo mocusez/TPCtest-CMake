@@ -2,11 +2,15 @@
 
 ## Suggest Environment
 
-GCC 11
+LLVM
+
+Clang 14
 
 CMake 3.22.1
 
 Git
+
+Python3
 
 ## Compile
 
@@ -22,5 +26,12 @@ cmake --build build -j
 cp -r data/ build/
 ctest --test-dir build --verbose
 rm -rf build/data/
+```
+
+## JIT-Test
+
+```
+python3 jit/compile_bc.py
+python3 run/compile_bc.py
 ```
 

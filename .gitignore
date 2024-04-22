@@ -1,3 +1,5 @@
 build
 .vscode
 self_git.sh
+jit/jit_output
+jit/__pycache__
