@@ -12,15 +12,15 @@ Git
 
 ```bash
 mkdir build
-cd build
-cmake ..
-make -j $(nproc)
+cmake -B build -DCMAKE_C_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/bin/clang++
+cmake --build build -j
 ```
 
-## Query Test
+## Test
 
 ```bash
-cd build
-./test/q1 
+cp -r data/ build/
+ctest --test-dir build --verbose
+rm -rf build/data/
 ```
 
