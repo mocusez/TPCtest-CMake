@@ -32,6 +32,6 @@ rm -rf build/data/
 
 ```
 python3 jit/compile_bc.py
-python3 run/compile_bc.py
+python3 jit/compile_bc.py
 ```
 
