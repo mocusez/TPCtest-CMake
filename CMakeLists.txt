@@ -8,6 +8,9 @@ project(TPCtest VERSION 1.0.0)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+# Set Optimize FLAG
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
 # 添加include目录
 include_directories(include)
 
