@@ -7,10 +7,8 @@ on:
     branches: [ "*" ]
 
 jobs:
-  build:
-
+  Clang-AOT-Test:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
 
@@ -37,7 +35,35 @@ jobs:
         ctest --test-dir build --verbose
         rm -rf build/data/
 
-  JIT-Run:
+  GCC-AOT-Test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: sudo apt-get install -y g++
+
+    - name: Configure Compiler
+      run: |
+        echo "CC=/usr/bin/gcc" >> $GITHUB_ENV
+        echo "CXX=/usr/bin/g++" >> $GITHUB_ENV
+
+    - name: Create Build Directory
+      run: mkdir build
+
+    - name: Configure CMake
+      run: cmake -B build
+
+    - name: Build
+      run: cmake --build build -j
+
+    - name: Test
+      run: |
+        cp -r data/ build/
+        ctest --test-dir build --verbose
+        rm -rf build/data/
+
+  JIT-Test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -48,6 +74,6 @@ jobs:
     - name: Compile ByteCode
       run: python3 jit/compile_bc.py
 
-    - name: Run
+    - name: Test
       run: python3 jit/run_bc.py
     
